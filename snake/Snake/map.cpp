@@ -11,6 +11,7 @@
 #include"SnakeBody.h"
 #include"globalvar.h"
 #include"Food.h"
+#include"IO.h"
 using namespace std;
 //////■
 
@@ -19,8 +20,11 @@ using namespace std;
 vector<Food*>::iterator it;
 extern vector<Food*>foods;
 extern int walls[60][80];//引用外部的walls数组记录所有墙体的信息
-//图片资源文件
 
+int* rankList;
+
+
+//图片资源文件
 IMAGE image1,image2,image3;
 
 
@@ -139,6 +143,13 @@ void drawMarks()
 	TCHAR ch2[4];
 	 swprintf_s(ch2,_T("%d"),playerSnake->length-3);
 	 outtextxy(210, 10, ch2);
+	 //显示记录中的最高分
+	 TCHAR ch3[] = _T("HighestMark:");
+	 outtextxy(10, 25, ch3);
+	 TCHAR ch4[4];
+	 swprintf_s(ch4, _T("%d"), rankList[0]);
+	 outtextxy(210, 25, ch4);
+	 
 }
 
 
@@ -148,6 +159,8 @@ void initMap(int step)
 	//初始化相应的地图元素
 	//初始化欢迎界面
 	//初始化墙体
+	rankList = rankRead();
+
 	SnakeBody* snakeBody = new SnakeBody(new Coord(12, 12));
 	playerSnake = snakeBody;
 	int keyPressed=0;
@@ -165,7 +178,7 @@ void initMap(int step)
 	loadimage(&image3, _T("D:\\VS\\snake\\bomb.png"));
 
 	//游戏的主题应该在这个循环中
-	while (true)
+	while (!GameOver)
 	{
 		//直行
 		snakeBody->snakeMove();
@@ -188,35 +201,39 @@ void drawGameOver()
 {
 	if (GameOver == false)
 		return;
-	cleardevice;
+	setbkcolor(0xD4F2E7);
+	//cleardevice();
+	//clearcircle(200, 200, 200);
 	settextcolor(0x2E8B57);
 	settextstyle(100, 100, _T("menulis"));
-	TCHAR ch[] = _T("GAMEOVER");
-	outtextxy(0, 100, ch);
-	//TCHAR ch2[] = _T("SNAKE");
-	//outtextxy(150, 200, ch2);
+	TCHAR over[] = _T("GAMEOVER");
+
+	outtextxy(0, 120, over);
+	
+	Sleep(10);
+	
+	
 
 }
 
 
 void draw(int step)
 {
+	Sleep(10);
 	setlinecolor(0xabcdef);
 	setfillcolor(0xabcdef);
 	while (!GameOver)
 	{
 		setbkcolor(0xD4F2E7);
 		cleardevice();
-		
 		BeginBatchDraw();
 		drwaWall(step);
 	    drawSnake();
 		drawFood();
 		drawMarks();
 
-
 		FlushBatchDraw();
-	//	EndBatchDraw();
+		EndBatchDraw();
 		
 		Sleep(200);
 	}
@@ -225,8 +242,6 @@ void draw(int step)
 
 int  drawWelcome()
 {
-
-
 	settextcolor(0x2E8B57);
 	settextstyle(100, 100,_T("menulis"));
 	TCHAR ch[] = _T("WELCOME");
@@ -274,21 +289,3 @@ int  drawWelcome()
 
 
 /*下面是一个文件的读取的操作**/
-int* rankRead()
-{
-	
-	FILE* rank;
-	fopen_s(&rank,"D:\\VS\\snake\\Snake\\rank.txt", "r+");
-	int* rankArray = new int[15]{-1};
-	int index =0;
-	while (!feof(rank))
-	{
-		fscanf_s(rank, "%d,", &rankArray[index++]);
-	}
-	//int b = rankArray[2];
-	return rankArray;
- }
-void rankwrite()
-{
-
-}

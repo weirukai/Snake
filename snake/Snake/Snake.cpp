@@ -4,26 +4,15 @@
 #include <iostream>
 #include<thread>
 #include<graphics.h>
+#include<easyx.h>
 #include"Node.h"
 #include"Coord.h"
-#include<easyx.h>
 #include"globalvar.h"
 using namespace std;
 
 
 int main()
 {
-
-
-	//测试io函数
-
-
-	rankRead();
-
-
-
-
-
 
 	initgraph(screenWidth, screenHeight);
 	setbkcolor(0xD4F2E7);
@@ -36,9 +25,7 @@ int main()
 	thread f = std::thread(createAllFood);
 	f.detach();
 	initMap(step);
-	//这个线程执行结束的时候才会继续执行主线程上的其他的内容
-	//drawWelcome();
-	Sleep(30);
+	Sleep(300);
 	_getch();
 	closegraph();
 }

@@ -6,10 +6,12 @@
 #include<easyx.h>
 #include"globalvar.h"
 #include "Food.h"
+#include"SnakeBody.h"
+
 using namespace std;
 
 extern vector<Food*>foods;
-
+extern SnakeBody* playerSnake;
 
 Food::Food(Coord* coord, int type)
 {
@@ -107,6 +109,7 @@ void createOneFood(int Type)
 void createAllFood()
 {
 	//srand(time(NULL));
+	Sleep(10);
 	while (!GameOver)
 	{
 
