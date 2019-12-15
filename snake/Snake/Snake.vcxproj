@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Coord.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="globalvar.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="map.cpp" />
@@ -161,11 +162,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coord.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="globalvar.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="SnakeBody.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="apple1.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,7 +16,12 @@ public:
 	SnakeBody(Coord* coord);
 	~SnakeBody();
 	void snakeMove();
+	void snakeTurn(int keyPressed);
+	void sankeEat(int FoodType);
 };
+
+////Åö×²¼ì²â£¬Åö×²¼ì²â£¬Åö×²¼ì²â£¬Åö×²¼ì²â
+void clissionDetect();
 
 
 

@@ -13,24 +13,21 @@ using namespace std;
 
 int main()
 {
-	
 	initgraph(screenWidth, screenHeight);
-	setbkcolor(0xffffff);
+	setbkcolor(0xD4F2E7);
 	cleardevice();
 	Sleep(3000);
-	
-	
+	thread t = std::thread(draw, 1);
+	t.detach();
+	thread f = std::thread(createAllFood);
+	f.detach();
 	initMap(1);
-	//thread t = std::thread(draw, 1);
-	//t.detach();
 	//这个线程执行结束的时候才会继续执行主线程上的其他的内容
 	drawWelcome();
 	Sleep(30);
 	_getch();
 	closegraph();
 }
-
-
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
