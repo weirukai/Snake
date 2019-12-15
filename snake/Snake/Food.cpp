@@ -20,6 +20,9 @@ Food::Food(Coord* coord, int type)
 	foods.push_back(this);
 }
 
+
+
+/*随机生成食物，给食物生成一个随机坐标*/
 Coord* createRandomCoord()
 {
 	vector<Food*> ::iterator it;//声明一个迭代器
@@ -35,6 +38,8 @@ Coord* createRandomCoord()
 		//生成的随机坐标，并且保证不会生成在边界上面
 	x = createRandom() % (maxhor - 1) + 1;
 	y = createRandom() % (maxver - 1) + 1;
+
+
 	//检查蛇身
 	while (ptr != NULL)
 	{
@@ -53,15 +58,23 @@ Coord* createRandomCoord()
 			getRightPlace = false;
 		}
 	}
-	
+	//检查墙体
+	 if (walls[y][x]==WALL)
+	 {
+		 getRightPlace = false;
+	 }
 
 
 	while (!getRightPlace)
 	{
 
-		x = createRandom() % (maxhor - 2) + 1;
-		y = createRandom() % (maxver - 2) + 1;
+		x = createRandom() % (maxhor - 3) + 1;
+		y = createRandom() % (maxver - 3) + 1;
 		//检查蛇身
+		if (walls[y][x] == WALL)
+		{
+			getRightPlace = false;
+		}
 		while (ptr != NULL)
 		{
 			if (x == ptr->coord->hor && y == ptr->coord->ver)
@@ -97,7 +110,7 @@ void createAllFood()
 	while (!GameOver)
 	{
 
-		if (foods.size()<4)
+		if (foods.size()<6)
 		{
 			int num = createRandom() % 8;//
 			if (num==0)

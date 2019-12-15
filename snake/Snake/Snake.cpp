@@ -13,17 +13,31 @@ using namespace std;
 
 int main()
 {
+
+
+	//测试io函数
+
+
+	rankRead();
+
+
+
+
+
+
 	initgraph(screenWidth, screenHeight);
 	setbkcolor(0xD4F2E7);
 	cleardevice();
 	Sleep(3000);
-	thread t = std::thread(draw, 1);
+	int step=drawWelcome();
+	
+	thread t = std::thread(draw,step);
 	t.detach();
 	thread f = std::thread(createAllFood);
 	f.detach();
-	initMap(1);
+	initMap(step);
 	//这个线程执行结束的时候才会继续执行主线程上的其他的内容
-	drawWelcome();
+	//drawWelcome();
 	Sleep(30);
 	_getch();
 	closegraph();

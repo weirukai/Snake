@@ -57,9 +57,49 @@ void drwaWall(int step)
 		}
 
 	}
+	if (step==STEPTWO)
+	{
+		
+		for (int i = 0; i < maxhor; i++)
+		{
+
+			for (int j = 0; j < maxver; j++)
+			{
+				if (i==maxhor/3&&j<maxver/2||i==2*maxhor/3&&j>maxver/2)
+				{
+					walls[j][i] = WALL;
+					solidcircle(i * width + width / 2, j * width + width / 2, width / 2);
+
+				}
+
+			}
+
+		}
+
+		
+
+	}
+	else if(step==STEPTHREE)
+	{
+		for (int i = 0; i < maxhor; i++)
+		{
+			for (int j = 0; j < maxver; j++)
+			{
+
+				if ((j==maxver/4&&i<maxhor/2)||(j==maxver/2&&i>maxhor/2)||(j==3*maxver/4&&i<maxhor/2))
+				{
+					walls[j][i] = WALL;
+					solidcircle(i * width + width / 2, j * width + width / 2, width / 2);
+				}
+			}
+		}
+
+	}
+
 }
 
 
+/*绘制所有的食物*/
 void drawFood()
 {
 	
@@ -87,8 +127,19 @@ void drawFood()
 }
 
 
-
-
+/*绘制分数*/
+void drawMarks()
+{
+	//分数就设置成蛇身的长度
+	settextcolor(0xDC143C);
+	settextstyle(15, 15, _T("Didot"));
+	TCHAR ch[] = _T("CurrentMarks:");
+	outtextxy(10, 10, ch);
+	settextcolor(0xF4A460);
+	TCHAR ch2[4];
+	 swprintf_s(ch2,_T("%d"),playerSnake->length-3);
+	 outtextxy(210, 10, ch2);
+}
 
 
 /**/
@@ -161,15 +212,18 @@ void draw(int step)
 		drwaWall(step);
 	    drawSnake();
 		drawFood();
+		drawMarks();
+
+
 		FlushBatchDraw();
-		EndBatchDraw();
+	//	EndBatchDraw();
 		
 		Sleep(200);
 	}
 	drawGameOver();
 }
 
-void drawWelcome()
+int  drawWelcome()
 {
 
 
@@ -179,31 +233,14 @@ void drawWelcome()
 	outtextxy(50, 100, ch);
 	TCHAR ch2[] = _T("SNAKE");
 	outtextxy(150, 200, ch2);
-	
-	
-		/*for (int y = 0; y <= 600; y++)
-		{
-			setlinecolor(RGB(0, 0, y / 3));
-			line(0, y, 800, y);
-		}
-		settextcolor(GREEN);
-		settextstyle(50, 20, _T("menulis"));
-		outtextxy(140, 100 + 40, _T("welcome to the game time!"));
-		settextstyle(60, 30, _T("menulis"));
-		outtextxy(450, 200 + 40, _T("——"));
-		outtextxy(500, 200 + 40, _T("snake"));
-		*/
 
-
-
-		setbkcolor(RGB(255, 127, 36));
+		//setbkcolor(RGB(255, 127, 36));
 		settextcolor(LIGHTGRAY);
-		settextstyle(40, 20, _T("menulis"));
-		outtextxy(130, 350, _T("start"));
-		outtextxy(350, 350, _T("about"));
-		outtextxy(560, 350, _T("quit"));
-		outtextxy(250, 450, _T("制作人：魏如凯"));
-		//ne(0, 390, 800, 390);
+		settextstyle(30, 20, _T("menulis"));
+		outtextxy(130, 350, _T("map I"));
+		//solidroundrect(130, 370, 210, 200, 20, 20);
+		outtextxy(350, 350, _T("map II"));
+		outtextxy(560, 350, _T("map III"));
 		//以上仅画图，没有页面的跳转
 
 		
@@ -218,18 +255,15 @@ void drawWelcome()
 				if (m.x > 130 && m.x < 230 && m.y>350 && m.y < 390)
 				{
 					//第一个按钮
-					setlinecolor(GREEN);
-					circle(400, 300, 10);
+					return STEPONE;
 				}
 				else if (m.x > 350 && m.x < 450 && m.y>350 && m.y < 390)
 				{
-					setlinecolor(RED);
-					circle(400, 300, 10);           //第二个按钮
+				   return	STEPTWO;         //第二个按钮
 				}
 				else if (m.x > 560 && m.x < 660 && m.y>350 && m.y < 390)
 				{
-					setlinecolor(DARKGRAY);
-					circle(400, 300, 10);        //第三个按钮
+					return STEPTHREE;       //第三个按钮
 				}
 			}
 		}
@@ -237,3 +271,24 @@ void drawWelcome()
 }
 
 
+
+
+/*下面是一个文件的读取的操作**/
+int* rankRead()
+{
+	
+	FILE* rank;
+	fopen_s(&rank,"D:\\VS\\snake\\Snake\\rank.txt", "r+");
+	int* rankArray = new int[15]{-1};
+	int index =0;
+	while (!feof(rank))
+	{
+		fscanf_s(rank, "%d,", &rankArray[index++]);
+	}
+	//int b = rankArray[2];
+	return rankArray;
+ }
+void rankwrite()
+{
+
+}

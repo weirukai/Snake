@@ -33,6 +33,14 @@ using namespace std;
 
 #define WALL -1236567
 
+///定义关卡
+#define STEPONE  111
+#define STEPTWO  222
+#define STEPTHREE 333
+
+ 
+
+
 extern vector<Food*> foods;
 extern int screenWidth;
 extern  int screenHeight;
@@ -45,9 +53,8 @@ extern SnakeBody* playerSnake;
 
 extern int walls[60][80];//将所有的墙体信息保存在一个二维数组中
 
-
-
-
+//当前的分数
+extern int marks;
 
 int createRandom();
 //

@@ -9,11 +9,14 @@
  int width = 10;
  int height = 10;
  int walls[60][80] = {0};
- int  maxhor = screenWidth / width;
- int  maxver = screenHeight / height;
+ int  maxhor = screenWidth / width;//80
+ int  maxver = screenHeight / height;//60
  bool GameOver = false;
  SnakeBody* playerSnake = NULL;
 vector<Food*> foods;
+
+//int marks = playerSnake->length;
+
 int createRandom()
 {
     LARGE_INTEGER seed;
