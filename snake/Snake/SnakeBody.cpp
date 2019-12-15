@@ -7,6 +7,11 @@
 #include"Node.h"
 #include"globalvar.h"
 
+
+
+extern int walls[60][80];
+
+
 SnakeBody::SnakeBody(Coord* coord)
 {
 	this->head = new Node(coord, NULL, NULL);//作为一个空节点；
@@ -146,6 +151,10 @@ void SnakeBody::snakeEat(int type)
 	}
 	else if(type==STRAWBERRY)
 	{
+		if (this->length<=3)
+		{
+			GameOver = true;
+		}
 		this->length--;
 		tail = tail->previous;
 		tail->next->previous = NULL;
@@ -157,7 +166,6 @@ void SnakeBody::snakeEat(int type)
 		{
 			//执行结束语句
 			GameOver = true;
-			
 		}
 		else
 		{
@@ -182,10 +190,10 @@ void clissionDetect()
 {
 	Node* head = playerSnake->head;
 	//碰到墙体
-	/*if (walls[head->coord->ver][head->coord->hor]==WALL)
+	if (walls[head->coord->ver][head->coord->hor]==WALL)
 	{
 		GameOver = true;
-	}*/
+	}
 	
 
 	 //碰到食物

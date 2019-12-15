@@ -43,7 +43,7 @@ extern int  maxver;
 extern bool GameOver;
 extern SnakeBody* playerSnake;
 
-extern int **walls;//将所有的墙体信息保存在一个二维数组中
+extern int walls[60][80];//将所有的墙体信息保存在一个二维数组中
 
 
 

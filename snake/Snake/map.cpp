@@ -18,7 +18,7 @@ using namespace std;
 //定义一个用于遍历食物list的迭代器
 vector<Food*>::iterator it;
 extern vector<Food*>foods;
-extern int** walls;//引用外部的walls数组记录所有墙体的信息
+extern int walls[60][80];//引用外部的walls数组记录所有墙体的信息
 //图片资源文件
 
 IMAGE image1,image2,image3;
@@ -51,7 +51,7 @@ void drwaWall(int step)
 		{
 			if (i==0||i==maxhor-1||j==0||j==maxver-1)
 			{
-				//walls[j][i] = WALL;
+				walls[j][i] = WALL;
 				solidcircle(i * width + width / 2, j * width + width / 2, width / 2);
 			}
 		}
@@ -101,12 +101,14 @@ void initMap(int step)
 	playerSnake = snakeBody;
 	int keyPressed=0;
 
-	/*for (int i = 0; i < maxver; i++)
+	for (int i = 0; i < maxver; i++)
 	{
-		walls[i] = new int[maxhor];
-	}*/
-	
-
+		for (int j = 0; j < maxhor; j++)
+		{
+			walls[i][j]= 0;
+		}
+		
+	}
 	loadimage(&image1, _T("D:\\VS\\snake\\apple1.png"));//////////贴图的操作
 	loadimage(&image2, _T("D:\\VS\\snake\\strawberry.png"));
 	loadimage(&image3, _T("D:\\VS\\snake\\bomb.png"));
@@ -137,9 +139,9 @@ void drawGameOver()
 		return;
 	cleardevice;
 	settextcolor(0x2E8B57);
-	settextstyle(10, 100, _T("menulis"));
+	settextstyle(100, 100, _T("menulis"));
 	TCHAR ch[] = _T("GAMEOVER");
-	outtextxy(50, 100, ch);
+	outtextxy(0, 100, ch);
 	//TCHAR ch2[] = _T("SNAKE");
 	//outtextxy(150, 200, ch2);
 
@@ -164,7 +166,7 @@ void draw(int step)
 		
 		Sleep(200);
 	}
-	//drawGameOver();
+	drawGameOver();
 }
 
 void drawWelcome()

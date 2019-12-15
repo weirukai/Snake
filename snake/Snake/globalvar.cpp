@@ -8,7 +8,7 @@
   int screenHeight = 600;
  int width = 10;
  int height = 10;
- int **walls = new int*[maxver];
+ int walls[60][80] = {0};
  int  maxhor = screenWidth / width;
  int  maxver = screenHeight / height;
  bool GameOver = false;
