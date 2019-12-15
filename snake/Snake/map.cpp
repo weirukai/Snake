@@ -18,6 +18,7 @@ using namespace std;
 //定义一个用于遍历食物list的迭代器
 vector<Food*>::iterator it;
 extern vector<Food*>foods;
+extern int** walls;//引用外部的walls数组记录所有墙体的信息
 //图片资源文件
 
 IMAGE image1,image2,image3;
@@ -39,7 +40,7 @@ void drawSnake()
 
 
 /*绘制地图的围墙*/
-void drwaWall()
+void drwaWall(int step)
 {
 	
 	Coord* wallCoord = new Coord(0,0);
@@ -50,6 +51,7 @@ void drwaWall()
 		{
 			if (i==0||i==maxhor-1||j==0||j==maxver-1)
 			{
+				//walls[j][i] = WALL;
 				solidcircle(i * width + width / 2, j * width + width / 2, width / 2);
 			}
 		}
@@ -89,8 +91,6 @@ void drawFood()
 
 
 
-
-
 /**/
 void initMap(int step)
 {
@@ -100,6 +100,12 @@ void initMap(int step)
 	SnakeBody* snakeBody = new SnakeBody(new Coord(12, 12));
 	playerSnake = snakeBody;
 	int keyPressed=0;
+
+	/*for (int i = 0; i < maxver; i++)
+	{
+		walls[i] = new int[maxhor];
+	}*/
+	
 
 	loadimage(&image1, _T("D:\\VS\\snake\\apple1.png"));//////////贴图的操作
 	loadimage(&image2, _T("D:\\VS\\snake\\strawberry.png"));
@@ -118,30 +124,47 @@ void initMap(int step)
 			snakeBody->snakeTurn(keyPressed);
 		}
 		//生成食物
+		clissionDetect();
 		Sleep(SPEEDFIRST);
 	}
 }
 
 
 
+void drawGameOver()
+{
+	if (GameOver == false)
+		return;
+	cleardevice;
+	settextcolor(0x2E8B57);
+	settextstyle(10, 100, _T("menulis"));
+	TCHAR ch[] = _T("GAMEOVER");
+	outtextxy(50, 100, ch);
+	//TCHAR ch2[] = _T("SNAKE");
+	//outtextxy(150, 200, ch2);
+
+}
+
+
 void draw(int step)
 {
 	setlinecolor(0xabcdef);
 	setfillcolor(0xabcdef);
-	while (!GameVoer)
+	while (!GameOver)
 	{
 		setbkcolor(0xD4F2E7);
 		cleardevice();
 		
 		BeginBatchDraw();
-		drwaWall();
+		drwaWall(step);
 	    drawSnake();
 		drawFood();
 		FlushBatchDraw();
 		EndBatchDraw();
 		
-		Sleep(100);
+		Sleep(200);
 	}
+	//drawGameOver();
 }
 
 void drawWelcome()
@@ -210,4 +233,5 @@ void drawWelcome()
 		}
     //return 1;
 }
+
 

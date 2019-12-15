@@ -59,8 +59,8 @@ Coord* createRandomCoord()
 	while (!getRightPlace)
 	{
 
-		x = createRandom() % (maxhor - 1) + 1;
-		y = createRandom() % (maxver - 1) + 1;
+		x = createRandom() % (maxhor - 2) + 1;
+		y = createRandom() % (maxver - 2) + 1;
 		//¼ì²éÉßÉí
 		while (ptr != NULL)
 		{
@@ -78,7 +78,6 @@ Coord* createRandomCoord()
 				getRightPlace = false;
 			}
 		}
-		
 	}
 	coord->hor = x;
 	coord->ver = y;
@@ -95,12 +94,12 @@ void createOneFood(int Type)
 void createAllFood()
 {
 	//srand(time(NULL));
-	while (!GameVoer)
+	while (!GameOver)
 	{
 
 		if (foods.size()<4)
 		{
-			int num = createRandom() % 5;//
+			int num = createRandom() % 8;//
 			if (num==0)
 			{
 				createOneFood(STRAWBERRY);

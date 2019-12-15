@@ -1,2 +1,12 @@
-﻿  SnakeBody.cpp
+﻿  map.cpp
+D:\VS\snake\Snake\globalvar.h(18,1): warning C4005: “VK_LEFT”: 宏重定义
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(527): message : 参见“VK_LEFT”的前一个定义
+D:\VS\snake\Snake\globalvar.h(19,1): warning C4005: “VK_RIGHT”: 宏重定义
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(529): message : 参见“VK_RIGHT”的前一个定义
+D:\VS\snake\Snake\globalvar.h(20,1): warning C4005: “VK_UP”: 宏重定义
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(528): message : 参见“VK_UP”的前一个定义
+D:\VS\snake\Snake\globalvar.h(21,1): warning C4005: “VK_DOWN”: 宏重定义
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(530): message : 参见“VK_DOWN”的前一个定义
+D:\VS\snake\Snake\map.cpp(138,2): warning C4551: 缺少参数列表的函数调用
+D:\VS\snake\Snake\map.cpp(208,7): warning C4101: “page”: 未引用的局部变量
   Snake.vcxproj -> D:\VS\snake\Debug\Snake.exe

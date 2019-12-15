@@ -131,11 +131,9 @@ void SnakeBody::snakeTurn(int keyPressed)
 		tail = tailePre;
 	}
 }
-void SnakeBody::sankeEat(int type)
+void SnakeBody::snakeEat(int type)
 {
 	
-	
-
 
 	if (type==APPLE)
 	{
@@ -158,13 +156,14 @@ void SnakeBody::sankeEat(int type)
 		if (this->length < 6)
 		{
 			//执行结束语句
+			GameOver = true;
 			
 		}
 		else
 		{
 			this->length = this->length / 2;
 			Node* newTail = playerSnake->head;
-			for (int i = 0; i < this->length / 2 - 1; i++)
+			for (int i = 0; i < this->length-1 ; i++)
 			{
 				newTail = newTail->next;
 			}
@@ -183,17 +182,23 @@ void clissionDetect()
 {
 	Node* head = playerSnake->head;
 	//碰到墙体
-	if (head->coord->hor==0||head->coord->hor==maxhor-1||head->coord->ver==0||head->coord->ver==maxver-1)
+	/*if (walls[head->coord->ver][head->coord->hor]==WALL)
 	{
-		printf("碰到墙体");
-	}
+		GameOver = true;
+	}*/
+	
 
 	 //碰到食物
-	for (std::vector<Food*>::iterator i=foods.begin(); i!=foods.end(); i++)
+	for (std::vector<Food*>::iterator i=foods.begin(); i!=foods.end(); )
 	{
 		if (head->coord->hor==(*i)->coord->hor&&head->coord->ver==(*i)->coord->ver)
 		{
-			playerSnake->sankeEat((*i)->type);
+			playerSnake->snakeEat((*i)->type);
+			i=foods.erase(i);
+		}
+		else
+		{
+			i++;
 		}
 	}
 

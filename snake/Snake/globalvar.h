@@ -22,7 +22,7 @@ using namespace std;
 #define ESC 27
 #define ENTER 13
 //蛇的移动速度
-#define SPEEDFIRST 1000
+#define SPEEDFIRST 100
 #define SPEEDSECOND  500
 
 //定义食物的种类
@@ -31,7 +31,7 @@ using namespace std;
 #define BOMB 30
 #define SMARTGRASS 40
 
-
+#define WALL -1236567
 
 extern vector<Food*> foods;
 extern int screenWidth;
@@ -40,8 +40,13 @@ extern int width;
 extern int height;
 extern int  maxhor;
 extern int  maxver;
-extern bool GameVoer;
+extern bool GameOver;
 extern SnakeBody* playerSnake;
+
+extern int **walls;//将所有的墙体信息保存在一个二维数组中
+
+
+
 
 
 int createRandom();

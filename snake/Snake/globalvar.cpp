@@ -8,10 +8,10 @@
   int screenHeight = 600;
  int width = 10;
  int height = 10;
-
+ int **walls = new int*[maxver];
  int  maxhor = screenWidth / width;
  int  maxver = screenHeight / height;
- bool GameVoer = false;
+ bool GameOver = false;
  SnakeBody* playerSnake = NULL;
 vector<Food*> foods;
 int createRandom()
