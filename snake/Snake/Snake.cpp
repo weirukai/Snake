@@ -1,5 +1,6 @@
 ﻿// Snake.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
+#include<stdio.h>
 #include<conio.h>
 #include <iostream>
 #include<thread>
@@ -8,7 +9,7 @@
 #include"Node.h"
 #include"Coord.h"
 #include"globalvar.h"
-using namespace std;
+//using namespace std;
 
 
 int main()
@@ -19,12 +20,12 @@ int main()
 	cleardevice();
 	Sleep(3000);
 	int step=drawWelcome();
-	
+	initMap(step);
 	thread t = std::thread(draw,step);
 	t.detach();
 	thread f = std::thread(createAllFood);
 	f.detach();
-	initMap(step);
+	Game();
 	Sleep(300);
 	_getch();
 	closegraph();

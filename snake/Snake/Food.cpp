@@ -51,15 +51,29 @@ Coord* createRandomCoord()
 		}
 		ptr = ptr->next;
 	}
-     for (it = foods.begin();it != foods.end(); it++)
+
+	/*
+	 for (it = foods.begin();it != foods.end(); it++)
 	{
 		//遍历所有其它的食物
-		
+		//用迭代器遍历的时候会发生问题
 		if (x == (*it)->coord->hor && y == (*it)->coord->ver)//遇到空指针的情况
 		{
 			getRightPlace = false;
 		}
 	}
+	
+	*/
+    
+	for (int i = 0; i < foods.size(); i++)
+	{
+		if (x==foods[i]->coord->hor&&y==foods[i]->coord->ver)
+		{
+			getRightPlace = false;
+		}
+	}
+
+
 	//检查墙体
 	 if (walls[y][x]==WALL)
 	 {
@@ -68,7 +82,7 @@ Coord* createRandomCoord()
 
 
 	while (!getRightPlace)
-	{
+	{ 
 
 		x = createRandom() % (maxhor - 3) + 1;
 		y = createRandom() % (maxver - 3) + 1;
@@ -84,7 +98,6 @@ Coord* createRandomCoord()
 				getRightPlace = false;
 			}
 		}
-
 		for (it = foods.begin(); it != foods.end(); it++)
 		{
 			//遍历所有其它的食物
@@ -94,6 +107,7 @@ Coord* createRandomCoord()
 			}
 		}
 	}
+
 	coord->hor = x;
 	coord->ver = y;
 	return coord;
@@ -109,7 +123,7 @@ void createOneFood(int Type)
 void createAllFood()
 {
 	//srand(time(NULL));
-	Sleep(10);
+	Sleep(20);
 	while (!GameOver)
 	{
 
@@ -129,7 +143,7 @@ void createAllFood()
 				createOneFood(APPLE);
 			}
 		}
-		Sleep(100);
+		Sleep(200);
 	}
 
 }

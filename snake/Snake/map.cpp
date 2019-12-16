@@ -4,7 +4,6 @@
 #include<list>
 #include<conio.h>
 #include<random>
-
 #include"map.h"
 #include"Node.h"
 #include"Coord.h"
@@ -116,7 +115,7 @@ void drawFood()
 		else if(STRAWBERRY==((*it)->type))
 		{
 			//保持闪烁，有时候过来绘制有时候不绘制
-			if (createRandom() % 2== 0)
+			if (createRandom() % 4== 0)
 			{
 				putimage((*it)->x, (*it)->y, &image2);
 			}
@@ -163,7 +162,7 @@ void initMap(int step)
 
 	SnakeBody* snakeBody = new SnakeBody(new Coord(12, 12));
 	playerSnake = snakeBody;
-	int keyPressed=0;
+	
 
 	for (int i = 0; i < maxver; i++)
 	{
@@ -178,16 +177,23 @@ void initMap(int step)
 	loadimage(&image3, _T("D:\\VS\\snake\\bomb.png"));
 
 	//游戏的主题应该在这个循环中
+	
+}
+
+
+void Game()
+{
+	int keyPressed = 0;
 	while (!GameOver)
 	{
 		//直行
-		snakeBody->snakeMove();
+		 playerSnake->snakeMove();
 
 		//转弯
-		if (_kbhit()!=0)
+		if (_kbhit() != 0)
 		{
 			keyPressed = _getch();//获得按键的键值
-			snakeBody->snakeTurn(keyPressed);
+			playerSnake->snakeTurn(keyPressed);
 		}
 		//生成食物
 		clissionDetect();
@@ -195,20 +201,51 @@ void initMap(int step)
 	}
 }
 
-
-
 void drawGameOver()
 {
 	if (GameOver == false)
 		return;
+
+
+	//将游戏的得分存储
+	rankwrite(playerSnake->length - 3);
 	setbkcolor(0xD4F2E7);
 	//cleardevice();
 	//clearcircle(200, 200, 200);
 	settextcolor(0x2E8B57);
 	settextstyle(100, 100, _T("menulis"));
 	TCHAR over[] = _T("GAMEOVER");
-
 	outtextxy(0, 120, over);
+	//绘制排行榜，仅仅绘前五名
+	TCHAR rank[5][4];
+	for (int i = 0; i < 5; i++)
+	{
+		swprintf_s(rank[i], _T("%d"), rankList[i]);
+	}
+	TCHAR rankNum[5][2];
+	int  number[5] = { 1,2,3,4,5 };
+	for (int i = 0; i < 5; i++)
+	{
+		swprintf_s(rankNum[i], _T("%d"), number[i]);
+	}
+	settextstyle(20, 20, _T("menulis"));
+
+	TCHAR tips[5] = _T("NO");
+	TCHAR comma[2] = _T(".");
+
+	for (int i = 0; i < 5; i++)
+	{
+		settextstyle(20, 20, _T("menulis"));
+		outtextxy(300, i * 22 + 300, tips);
+		settextstyle(2, 20, _T("menulis"));
+		outtextxy(340, i * 22 + 320, comma);
+		settextstyle(20, 20, _T("menulis"));
+		outtextxy(346, i * 22 + 300, rankNum[i]);
+		outtextxy(400, i * 22 + 300, rank[i]);
+	}
+	
+
+
 	
 	Sleep(10);
 	

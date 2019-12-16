@@ -9,6 +9,7 @@ void initMap(int);
 void draw(int step);
 int drawWelcome();
 int* rankRead();
+void Game();
 //仅仅需要绘制一遍就够了
 
 #endif // !map_h

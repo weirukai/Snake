@@ -1,4 +1,4 @@
-﻿  Snake.cpp
+﻿  Food.cpp
 D:\VS\snake\Snake\globalvar.h(18,1): warning C4005: “VK_LEFT”: 宏重定义
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(527): message : 参见“VK_LEFT”的前一个定义
 D:\VS\snake\Snake\globalvar.h(19,1): warning C4005: “VK_RIGHT”: 宏重定义
@@ -7,4 +7,6 @@ D:\VS\snake\Snake\globalvar.h(20,1): warning C4005: “VK_UP”: 宏重定义
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(528): message : 参见“VK_UP”的前一个定义
 D:\VS\snake\Snake\globalvar.h(21,1): warning C4005: “VK_DOWN”: 宏重定义
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(530): message : 参见“VK_DOWN”的前一个定义
+D:\VS\snake\Snake\Food.cpp(38,12): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+D:\VS\snake\Snake\Food.cpp(68,20): warning C4018: “<”: 有符号/无符号不匹配
   Snake.vcxproj -> D:\VS\snake\Debug\Snake.exe

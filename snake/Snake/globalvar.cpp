@@ -13,7 +13,7 @@
  int  maxver = screenHeight / height;//60
  bool GameOver = false;
  SnakeBody* playerSnake = NULL;
-vector<Food*> foods;
+ vector<Food*> foods;
 
 //int marks = playerSnake->length;
 
