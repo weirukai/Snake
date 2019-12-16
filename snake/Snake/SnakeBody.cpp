@@ -188,6 +188,7 @@ void SnakeBody::snakeEat(int type)
 /**/
 void clissionDetect()
 {
+	threadfood.lock();
 	Node* head = playerSnake->head;
 	//碰到墙体
 	if (walls[head->coord->ver][head->coord->hor]==WALL)
@@ -216,6 +217,6 @@ void clissionDetect()
 		/////////////为了能够更好的 游戏，暂时不做这个检测
 	}
 
-
-
+	threadfood.unlock();
+	
 }

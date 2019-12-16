@@ -4,8 +4,10 @@
 #define globalvar_h
 #include <vector>
 #include<conio.h>
+#include<thread>
 #include<stdio.h>
 #include<iostream>
+#include<mutex>
 #include"SnakeBody.h"
 #include"Food.h"
 using namespace std;
@@ -38,7 +40,7 @@ using namespace std;
 #define STEPTWO  222
 #define STEPTHREE 333
 
- 
+#define FOODNUM 6
 
 
 extern vector<Food*> foods;
@@ -55,6 +57,9 @@ extern int walls[60][80];//将所有的墙体信息保存在一个二维数组中
 
 //当前的分数
 extern int marks;
+
+
+extern mutex threadfood;
 
 int createRandom();
 //

@@ -25,7 +25,7 @@ int main()
 	t.detach();
 	thread f = std::thread(createAllFood);
 	f.detach();
-	Game();
+	Game(step);
 	Sleep(300);
 	_getch();
 	closegraph();

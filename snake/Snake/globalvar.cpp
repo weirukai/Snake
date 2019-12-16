@@ -14,7 +14,7 @@
  bool GameOver = false;
  SnakeBody* playerSnake = NULL;
  vector<Food*> foods;
-
+ mutex threadfood;
 //int marks = playerSnake->length;
 
 int createRandom()

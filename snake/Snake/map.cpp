@@ -159,7 +159,7 @@ void initMap(int step)
 	//初始化欢迎界面
 	//初始化墙体
 	rankList = rankRead();
-
+	//foods.reserve(FOODNUM);
 	SnakeBody* snakeBody = new SnakeBody(new Coord(12, 12));
 	playerSnake = snakeBody;
 	
@@ -181,19 +181,26 @@ void initMap(int step)
 }
 
 
-void Game()
+void Game(int step)
 {
 	int keyPressed = 0;
 	while (!GameOver)
 	{
 		//直行
 		 playerSnake->snakeMove();
-
 		//转弯
 		if (_kbhit() != 0)
 		{
 			keyPressed = _getch();//获得按键的键值
-			playerSnake->snakeTurn(keyPressed);
+			if (keyPressed==ESC)
+			{
+				saveScene(step);
+				getchar();
+			}
+			else
+			{
+				playerSnake->snakeTurn(keyPressed);
+			}
 		}
 		//生成食物
 		clissionDetect();
@@ -209,6 +216,9 @@ void drawGameOver()
 
 	//将游戏的得分存储
 	rankwrite(playerSnake->length - 3);
+	//存储游戏
+	//读取最新的数据
+	rankList = rankRead();
 	setbkcolor(0xD4F2E7);
 	//cleardevice();
 	//clearcircle(200, 200, 200);
@@ -243,14 +253,7 @@ void drawGameOver()
 		outtextxy(346, i * 22 + 300, rankNum[i]);
 		outtextxy(400, i * 22 + 300, rank[i]);
 	}
-	
-
-
-	
 	Sleep(10);
-	
-	
-
 }
 
 

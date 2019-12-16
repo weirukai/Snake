@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="rank.txt" />
+    <Text Include="scene.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

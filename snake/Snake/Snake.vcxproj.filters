@@ -78,5 +78,8 @@
     <Text Include="rank.txt">
       <Filter>资源文件</Filter>
     </Text>
+    <Text Include="scene.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

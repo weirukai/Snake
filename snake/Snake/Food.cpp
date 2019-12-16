@@ -27,6 +27,7 @@ Food::Food(Coord* coord, int type)
 /*随机生成食物，给食物生成一个随机坐标*/
 Coord* createRandomCoord()
 {
+
 	vector<Food*> ::iterator it;//声明一个迭代器
 	//食物的生成不能够生成在边界和蛇身，以及已经存在的食物的上面
 	//下面是检测的过程
@@ -98,30 +99,44 @@ Coord* createRandomCoord()
 				getRightPlace = false;
 			}
 		}
-		for (it = foods.begin(); it != foods.end(); it++)
+
+		/*for (it = foods.begin(); it != foods.end(); it++)
 		{
 			//遍历所有其它的食物
 			if (x == (*it)->coord->hor && y == (*it)->coord->ver)
 			{
 				getRightPlace = false;
 			}
+		}*/////使用迭代器的访问方式容易出问题
+		for (int i = 0; i < foods.size(); i++)
+		{
+			if (x == foods[i]->coord->hor && y == foods[i]->coord->ver)////////容易出错
+			{
+				getRightPlace = false;
+			}
 		}
+		
 	}
 
 	coord->hor = x;
 	coord->ver = y;
+	
 	return coord;
 }
 
 void createOneFood(int Type)
 {
+	threadfood.lock();
 	Coord* coord = createRandomCoord();
 	Food* newFood = new Food(coord, Type);
+	threadfood.unlock();
 }
 
 
 void createAllFood()
 {
+
+	
 	//srand(time(NULL));
 	Sleep(20);
 	while (!GameOver)
@@ -143,7 +158,7 @@ void createAllFood()
 				createOneFood(APPLE);
 			}
 		}
-		Sleep(200);
+		Sleep(100);
 	}
 
 }
