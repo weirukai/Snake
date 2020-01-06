@@ -28,6 +28,8 @@ SnakeBody::SnakeBody(Coord* coord)
 //蛇的行走，只是走了一步
 void SnakeBody::snakeMove()
 {
+
+	///////由于走起来不是特别的顺畅，可以通过修改这个地方的/////需要修改这个地方的逻辑
 	Node* tailePre = tail->previous;
 	Node* headNext = head->next;
 	Coord* headCoord = this->head->coord;
@@ -86,7 +88,7 @@ void SnakeBody::snakeTurn(int keyPressed)
 	Node* tailePre = this->tail->previous;
 	Node* headNext = this->head->next;
 	//处理用户的按键的输入，蛇身的转动
-	if (keyPressed==VK_DOWN&&this->direction!=UP)
+	if ((keyPressed==VK_DOWN||keyPressed== DOWNARR)&&this->direction!=UP)
 	{
 		this->direction = DOWN;
 		this->head->setCoord(new Coord(headCoord->hor, headCoord->ver + 1));
@@ -98,7 +100,7 @@ void SnakeBody::snakeTurn(int keyPressed)
 		tail->setCoord(new Coord(headCoord->hor, headCoord->ver ));
 		tail = tailePre;
 	}
-	else if(keyPressed==VK_LEFT&&this->direction!=RIGHT)
+	else if((keyPressed==VK_LEFT||keyPressed==LEFTARR)&&this->direction!=RIGHT)
 	{
 		this->direction = LEFT;
 		this->head->setCoord(new Coord(headCoord->hor-1, headCoord->ver ));
@@ -110,7 +112,7 @@ void SnakeBody::snakeTurn(int keyPressed)
 		tail->setCoord(new Coord(headCoord->hor, headCoord->ver ));
 		tail = tailePre;
 	}
-	else if (keyPressed==VK_RIGHT&&this->direction!=LEFT)
+	else if ((keyPressed==VK_RIGHT||keyPressed==RIGHTARR)&&this->direction!=LEFT)
 	{
 		this->direction = RIGHT;
 		this->head->setCoord(new Coord(headCoord->hor +1, headCoord->ver));
@@ -122,7 +124,7 @@ void SnakeBody::snakeTurn(int keyPressed)
 		tail->setCoord(new Coord(headCoord->hor , headCoord->ver));
 		tail = tailePre;
 	}
-	else if(keyPressed==VK_UP&&this->direction!=DOWN)
+	else if((keyPressed==VK_UP||keyPressed==UPARR)&&this->direction!=DOWN)
 	{
 		this->direction = UP;
 		this->head->setCoord(new Coord(headCoord->hor , headCoord->ver-1));
@@ -188,7 +190,7 @@ void SnakeBody::snakeEat(int type)
 /**/
 void clissionDetect()
 {
-	threadfood.lock();
+	threadfood.lock();//进程锁
 	Node* head = playerSnake->head;
 	//碰到墙体
 	if (walls[head->coord->ver][head->coord->hor]==WALL)

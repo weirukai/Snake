@@ -10,8 +10,6 @@
 #include"Coord.h"
 #include"globalvar.h"
 //using namespace std;
-
-
 int main()
 {
 

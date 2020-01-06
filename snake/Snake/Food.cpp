@@ -53,18 +53,6 @@ Coord* createRandomCoord()
 		ptr = ptr->next;
 	}
 
-	/*
-	 for (it = foods.begin();it != foods.end(); it++)
-	{
-		//遍历所有其它的食物
-		//用迭代器遍历的时候会发生问题
-		if (x == (*it)->coord->hor && y == (*it)->coord->ver)//遇到空指针的情况
-		{
-			getRightPlace = false;
-		}
-	}
-	
-	*/
     
 	for (int i = 0; i < foods.size(); i++)
 	{
@@ -73,7 +61,6 @@ Coord* createRandomCoord()
 			getRightPlace = false;
 		}
 	}
-
 
 	//检查墙体
 	 if (walls[y][x]==WALL)
@@ -100,14 +87,6 @@ Coord* createRandomCoord()
 			}
 		}
 
-		/*for (it = foods.begin(); it != foods.end(); it++)
-		{
-			//遍历所有其它的食物
-			if (x == (*it)->coord->hor && y == (*it)->coord->ver)
-			{
-				getRightPlace = false;
-			}
-		}*/////使用迭代器的访问方式容易出问题
 		for (int i = 0; i < foods.size(); i++)
 		{
 			if (x == foods[i]->coord->hor && y == foods[i]->coord->ver)////////容易出错

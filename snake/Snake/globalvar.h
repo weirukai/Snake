@@ -21,6 +21,10 @@ using namespace std;
 #define VK_RIGHT 68
 #define VK_UP 87
 #define VK_DOWN 83
+#define LEFTARR 37
+#define UPARR 38
+#define RIGHTARR 39
+#define DOWNARR 40
 #define ESC 27
 #define ENTER 13
 //蛇的移动速度

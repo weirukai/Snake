@@ -208,6 +208,7 @@ void Game(int step)
 	}
 }
 
+
 void drawGameOver()
 {
 	if (GameOver == false)
@@ -271,11 +272,9 @@ void draw(int step)
 	    drawSnake();
 		drawFood();
 		drawMarks();
-
 		FlushBatchDraw();
 		EndBatchDraw();
-		
-		Sleep(200);
+		Sleep(250);
 	}
 	drawGameOver();
 }
